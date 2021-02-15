@@ -1,11 +1,14 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Bibliothek {
     private List<Book> bookList;
@@ -38,5 +41,24 @@ public class Bibliothek {
     public List<Book> sortName(){
         bookList.sort(Comparator.comparing(Book::getName).reversed());
         return bookList;
+    }
+    public List<Book> filterAutor(){
+        List<Book> aux = new ArrayList<>();
+        aux = bookList.stream().filter(n->n.getAutor().startsWith("S")).collect(Collectors.toList());
+        aux.sort(Comparator.comparing(Book::getAutor));
+        return aux;
+    }
+    public List<Book> filterBooks(){
+        List<Book> aux = new ArrayList<>();
+        aux = bookList.stream().filter(n->n.getVerfExemplare()>3).collect(Collectors.toList());
+        aux.sort(Comparator.comparing(Book::getEjahr).reversed());
+        return aux;
+    }
+    public void gesamtAnzahl(){
+        int sum=0;
+        for(Book b:bookList){
+            sum+=b.getNrKopien();
+        }
+        System.out.println("Exista "+sum+" carti in biblioteca");
     }
 }
