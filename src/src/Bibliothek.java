@@ -61,4 +61,46 @@ public class Bibliothek {
         }
         System.out.println("Exista "+sum+" carti in biblioteca");
     }
+    public void writeSortedNames(){
+            try{
+                String filename = "name.txt";
+                FileWriter writer = new FileWriter(filename);
+                List<Book> aux = new ArrayList<>();
+                aux = sortName();
+                for(Book b:aux){
+                    writer.write(b.getName()+'#'+b.getAutor()+'#'+b.getEjahr()+'#'+b.getNrKopien()+'#'+b.getVerfExemplare()+'\n');
+                }
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
+    public void writeFilteredAutor(){
+        try{
+            String filename = "autor.txt";
+            FileWriter writer = new FileWriter(filename);
+            List<Book> aux = new ArrayList<>();
+            aux = filterAutor();
+            for(Book b:aux){
+                writer.write(b.getName()+'#'+b.getAutor()+'#'+b.getEjahr()+'#'+b.getNrKopien()+'#'+b.getVerfExemplare()+'\n');
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void writeFilteredBooks(){
+        try{
+            String filename = "exemplare.txt";
+            FileWriter writer = new FileWriter(filename);
+            List<Book> aux = new ArrayList<>();
+            aux = filterBooks();
+            for(Book b:aux){
+                writer.write(b.getName()+'#'+b.getAutor()+'#'+b.getEjahr()+'#'+b.getNrKopien()+'#'+b.getVerfExemplare()+'\n');
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
